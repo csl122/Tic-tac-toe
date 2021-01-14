@@ -38,6 +38,7 @@ class Game extends React.Component {
         return;
         }
 
+        // 平局的判定
         if (!this.calculateWinner(squares) && this.state.stepNumber ===8)
         {
             this.setState({tie: true});
