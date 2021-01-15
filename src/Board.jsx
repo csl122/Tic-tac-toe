@@ -8,11 +8,13 @@ class Board extends React.Component {
     renderSquare(i) {
         return (
         <Square
+            key={i}
             position={i}
             // Game类传进来的squares props, 记录了每个按钮上的文字
-            value={this.props.squares[i]}
+            value={this.props.squares[i].value}
             // Game类传进来的一个函数, 有了括号是自执行, 所以要用箭头函数来把它变成一个函数引用
             onClick={() => this.props.onClick(i)}
+            hili={this.props.squares[i].hili}
         />
         );
     }

@@ -10,7 +10,7 @@ class Game extends React.Component {
         // 最多九次历史记录
         history: [
             {
-            squares: Array(9).fill(null)
+            squares: [ {value:null, hili:false},{value:null, hili:false},{value:null, hili:false},{value:null, hili:false},{value:null, hili:false},{value:null, hili:false},{value:null, hili:false},{value:null, hili:false},{value:null, hili:false}]
             }
         ],
         // 步数统计
@@ -29,11 +29,11 @@ class Game extends React.Component {
         // 取到现在的这个
         const current = history[history.length - 1];
         // 获取squares的棋盘副本
-        const squares = current.squares.slice();
+        const squares = JSON.parse(JSON.stringify(current.squares));
 
 
         // 如果点了有东西的,或者已经获胜了,不进行操作
-        if (this.calculateWinner(squares) || squares[i]) {
+        if (this.calculateWinner(squares) || squares[i].value) {
             console.log(this.state.tie);
         return;
         }
@@ -45,7 +45,8 @@ class Game extends React.Component {
         }
 
         // 给点的这个按钮记录上值
-        squares[i] = this.state.xIsNext ? "X" : "O";
+        squares[i].value = this.state.xIsNext ? "X" : "O";
+
 
         this.setState({
         // 最新状态接上去
@@ -73,6 +74,7 @@ class Game extends React.Component {
         // 这里不需要副本
         const history = this.state.history;
         const current = history[this.state.stepNumber];
+        console.log(history);
         // 根据现在的squares来判断胜利者
         const winner = this.calculateWinner(current.squares);
 
@@ -146,11 +148,14 @@ class Game extends React.Component {
         ];
         for (let i = 0; i < lines.length; i++) {
             const [a, b, c] = lines[i];
-            if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-                document.getElementById(a).style.backgroundColor="yellow";
-                document.getElementById(b).style.backgroundColor="yellow";
-                document.getElementById(c).style.backgroundColor="yellow";
-                return squares[a];
+            if (squares[a].value && squares[a].value === squares[b].value && squares[a].value === squares[c].value) {
+                squares[a].hili=true;
+                squares[b].hili=true;
+                squares[c].hili=true;
+                // document.getElementById(a).style.backgroundColor="yellow";
+                // document.getElementById(b).style.backgroundColor="yellow";
+                // document.getElementById(c).style.backgroundColor="yellow";
+                return squares[a].value;
             }
         }
         return null;
