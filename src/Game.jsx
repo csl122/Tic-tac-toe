@@ -38,11 +38,7 @@ class Game extends React.Component {
         return;
         }
 
-        // 平局的判定
-        if (!this.calculateWinner(squares) && this.state.stepNumber ===8)
-        {
-            this.setState({tie: true});
-        }
+        this.updateTie(squares);
 
         // 给点的这个按钮记录上值
         squares[i].value = this.state.xIsNext ? "X" : "O";
@@ -61,8 +57,25 @@ class Game extends React.Component {
         });
     }
 
+    updateTie(squares){
+        // 平局的判定
+        if (!this.calculateWinner(squares) && this.state.stepNumber ===8)
+        {
+            this.setState({tie: true});
+        }else{
+            this.setState({tie: false});
+        }
+    }
+
     // 调整步数计数和下一步的用户
     jumpTo(step) {
+        // 截取一个到现在为止大小的副本
+        const history = this.state.history.slice(0, this.state.stepNumber + 1);
+        // 取到现在的这个
+        const current = history[history.length - 1];
+        // 获取squares的棋盘副本
+        const squares = JSON.parse(JSON.stringify(current.squares));
+        this.updateTie(squares);
         this.setState({
         stepNumber: step,
         xIsNext: (step % 2) === 0
