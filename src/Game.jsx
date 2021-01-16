@@ -5,13 +5,21 @@ import './index.css';
 class Game extends React.Component {
     constructor(props) {
         super(props);
+        // let obj = {value: null, hili: false};
+        let squaresBase = [];
+        for (let i = 0; i < 9; i++) {
+            squaresBase.push(this.createSquare());
+            // squaresBase.push(new Asquare());
+        }
+        console.log(squaresBase);
         // 三个可定义的state
         this.state = {
         // 最多九次历史记录
         history: [
             {
-            squares: [ {value:null, hili:false},{value:null, hili:false},{value:null, hili:false},{value:null, hili:false},{value:null, hili:false},{value:null, hili:false},{value:null, hili:false},{value:null, hili:false},{value:null, hili:false}]
-            }
+            // squares: [ {value:null, hili:false},{value:null, hili:false},{value:null, hili:false},{value:null, hili:false},{value:null, hili:false},{value:null, hili:false},{value:null, hili:false},{value:null, hili:false},{value:null, hili:false}]
+            squares: squaresBase
+        }
         ],
         // 步数统计
         stepNumber: 0,
@@ -20,6 +28,13 @@ class Game extends React.Component {
         ascending: true,
         tie: false
         };
+    }
+    createSquare() {
+        return {hili: false};
+    }
+    Asquare() {
+        this.value=null;
+        this.hili=false;
     }
 
     // 处理点击事件
@@ -59,7 +74,7 @@ class Game extends React.Component {
 
     updateTie(squares){
         // 平局的判定
-        if (!this.calculateWinner(squares) && this.state.stepNumber ===8)
+        if (!this.calculateWinner(squares) && this.state.stepNumber >=8)
         {
             this.setState({tie: true});
         }else{
@@ -166,8 +181,6 @@ class Game extends React.Component {
                 squares[b].hili=true;
                 squares[c].hili=true;
                 // document.getElementById(a).style.backgroundColor="yellow";
-                // document.getElementById(b).style.backgroundColor="yellow";
-                // document.getElementById(c).style.backgroundColor="yellow";
                 return squares[a].value;
             }
         }
