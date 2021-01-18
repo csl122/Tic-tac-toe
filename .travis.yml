@@ -1,9 +1,10 @@
 language: node_js
 node_js:
-  - 15
+  - '15'
+  - node
 cache:
   directories:
     - node_modules
 script:
-  - npm run build
-  - npm test
+  - npm install
+  - npm run test
