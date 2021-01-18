@@ -4,12 +4,19 @@ OS:
   - mac
   - windows
 node_js:
-  - '15'
   - node
 cache:
   directories:
     - node_modules
-script:
-  - npm install
-  - npm build
-  - npm run test
+jobs:
+  include:
+    - stage: lint
+      script:
+        - npm install
+        - npm install eslint -g
+        - npm run lint
+    - stage: test
+      script:
+        - npm install
+        - npm build
+        - npm run test
