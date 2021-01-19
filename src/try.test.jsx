@@ -1,5 +1,28 @@
 import forEach from "./try";
 
+test('async test', (done) => {
+    expect.assertions(1)
+    function fetchData(fn) {
+        const data = 'peanut butter';
+        setTimeout(callback, 1500, data);
+    }
+    
+    // function callback(data) {
+    //   expect(data).toBe('peanut butter');
+    // }
+
+    function callback(data) {
+        try {
+          expect(data).toBe('peanut butter');
+          done();
+        } catch (error) {
+          done(error);
+        }
+      }
+  
+    fetchData(callback);
+  });
+
 test("addTest", () => {
     const adad = jest.fn(() => 3);
     const num = adad(1, 2);
@@ -8,7 +31,7 @@ test("addTest", () => {
     expect(adad).toHaveBeenCalledWith(1, 2);
 });
 
-test("should ", () => {
+test("mock test ", () => {
     const mockCallback = jest.fn((x) => 42 + x);
     forEach([0, 1], mockCallback);
 
@@ -118,6 +141,6 @@ test("should ", () => {
     // in the same order, with the same arguments. It will also assert on the name.
     expect(mockFunc.mock.calls).toEqual([[arg1, arg2]]);
     expect(mockFunc.getMockName()).toBe("a mock name");
-    
+
     */
 });
