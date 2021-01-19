@@ -5,23 +5,23 @@ import userEvent from "@testing-library/user-event";
 import { unmountComponentAtNode } from "react-dom";
 
 const func = () => {
-  return <button> hello </button>;
+    return <button> hello </button>;
 };
 
 jest.mock("./Square", () => func);
 
 afterAll(() => {
-  jest.restoreAllMocks();
+    jest.restoreAllMocks();
 });
 
 test("renderBoardTest", () => {
-  const renderSquareSpy = jest
-    .spyOn(Board.prototype, "renderSquare")
-    .mockImplementation((i) => {
-      return <Square key={i} />;
-    });
+    const renderSquareSpy = jest
+        .spyOn(Board.prototype, "renderSquare")
+        .mockImplementation((i) => {
+            return <Square key={i} />;
+        });
 
-  const content = render(<Board />);
-  expect(content).toMatchSnapshot();
-  expect(renderSquareSpy).toBeCalledTimes(9);
+    const content = render(<Board />);
+    expect(content).toMatchSnapshot();
+    expect(renderSquareSpy).toBeCalledTimes(9);
 });
