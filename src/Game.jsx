@@ -10,9 +10,9 @@ class Game extends React.Component {
         const obj = { hili: false };
         for (let i = 0; i < 9; i++) {
             squaresBase.push({...obj});
-            // squaresBase.push(new Asquare());
+            // squaresBase.push(createSquare());
         }
-        console.log(squaresBase);
+        // console.log(squaresBase);
         // 三个可定义的state
         this.state = {
             // 最多九次历史记录
@@ -33,10 +33,7 @@ class Game extends React.Component {
     createSquare() {
         return { hili: false };
     }
-    Asquare() {
-        this.value = null;
-        this.hili = false;
-    }
+
 
     // 处理点击事件
     handleClick(i) {
@@ -110,12 +107,9 @@ class Game extends React.Component {
             let currentStep = history[index];
             let currentIndex = currentStep.index + 1;
             //Q1
-            const coordinate =
-                ": (" +
-                Math.ceil(currentIndex / 3) +
-                "," +
-                (currentIndex % 3 ? currentIndex % 3 : (currentIndex % 3) + 3) +
-                ")";
+
+            let coordinate = this.getCoordinate(currentIndex);
+            
             // 创建描述语句
             const desc = index
                 ? "Go to move #" + index + coordinate
@@ -173,9 +167,7 @@ class Game extends React.Component {
                         {this.state.ascending ? "Descending" : "ascending"}
                     </button>
                     {/* 全部打印一遍每次的记录 */}
-                    <ol
-                        className={this.state.ascending ? "" : "descendingList"}
-                    >
+                    <ol>
                         {moves}
                     </ol>
                 </div>
@@ -209,6 +201,14 @@ class Game extends React.Component {
             }
         }
         return null;
+    }
+
+    getCoordinate(currentIndex) {
+        return  ": (" +
+                Math.ceil(currentIndex / 3) +
+                "," +
+                (currentIndex % 3 ? currentIndex % 3 : (currentIndex % 3) + 3) +
+                ")";
     }
 }
 

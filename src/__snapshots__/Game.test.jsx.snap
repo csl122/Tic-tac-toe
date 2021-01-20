@@ -22,9 +22,7 @@ Object {
           <button>
             Descending
           </button>
-          <ol
-            class=""
-          >
+          <ol>
             <li>
               <button
                 class="button_active"
@@ -55,9 +53,7 @@ Object {
         <button>
           Descending
         </button>
-        <ol
-          class=""
-        >
+        <ol>
           <li>
             <button
               class="button_active"

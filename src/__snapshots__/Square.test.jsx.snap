@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renderTest  1`] = `
+exports[`Square shall render testButton 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <div>

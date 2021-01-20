@@ -23,7 +23,7 @@ afterEach(() => {
 
 */
 
-test('renderTest ', () => {
+test('Square shall render testButton', () => {
     const fakeOnClick = jest.fn()
     const content = render(
         <Square 
@@ -43,3 +43,19 @@ test('renderTest ', () => {
     
 
 })
+
+test('OnClick shall work', () => {
+  const fakeOnClick = jest.fn()
+    const {getByText} = render(
+        <Square 
+            value='testButton'
+            position={1}
+            hili={true}
+            onClick={fakeOnClick}
+        />
+    );
+    expect(fakeOnClick).toBeCalledTimes(0);
+    const button = getByText("testButton");
+    userEvent.click(button);
+    expect(fakeOnClick).toBeCalledTimes(1);  
+});
